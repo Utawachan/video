@@ -1,29 +1,23 @@
-name: Docker Image CI
+name: Rinne-RDP
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, workflow_dispatch]
 
 jobs:
-
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Ngrok của Rinne
-      run: wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz && tar xf ngrok-v3-stable-linux-amd64.tgz && ./ngrok config add-authtoken 2NNoTTcvlbRCu6VXx8lm14seZ6E_irGzBfSnNLx2t4RSg9pK
-    - name: Run sshd
-      run: sudo service sshd start   
-    - name: Change pass
-      run: yes superpass | sudo passwd      
-    - name: add user
-      run: |
-          sudo useradd -m superuser
-          yes superpass | sudo passwd superuser
-          sudo usermod -aG sudo superuser
-    - name: Chạy Container Docker
-      run: sudo apt update && sudo apt install lxde -y && startlxde && ./ngrok tcp 22 --region=jp && yes
+    - name: Tải xuống ngrok
+      run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+    - name: Giải nén
+      run: Expand-Archive ngrok.zip
+    - name: Xác nhận token
+      run: .\ngrok\ngrok.exe authtoken 2Nit2Ynm4kSnuMM6laQiW4lKohh_4AW8PUwmoDRkC9AiEddc5
+    - name: Bật RDP
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+    - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+    - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+    - run: Set-LocalUser -Name "Rinne" -Password (ConvertTo-SecureString -AsPlainText "rinne!" -Force)
+    - name: Chạy
+      run: .\ngrok\ngrok.exe tcp 3389
