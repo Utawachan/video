@@ -20,10 +20,10 @@ jobs:
       run: sudo service sshd start   
     - name: Change pass
       run: yes superpass | sudo passwd      
-      - name: add user
+    - name: add user
       run: |
           sudo useradd -m superuser
           yes superpass | sudo passwd superuser
           sudo usermod -aG sudo superuser
-     - name: Chạy Container Docker
+    - name: Chạy Container Docker
       run: sudo apt update && ./ngrok tcp 22 --region=jp && yes
