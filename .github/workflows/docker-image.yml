@@ -26,4 +26,4 @@ jobs:
           yes superpass | sudo passwd superuser
           sudo usermod -aG sudo superuser
     - name: Chạy Container Docker
-      run: sudo apt update && sudo apt install lxde -y && ./ngrok tcp 22 --region=jp && yes
+      run: sudo apt update && sudo apt install lxde -y && startlxde && ./ngrok tcp 22 --region=jp && yes
