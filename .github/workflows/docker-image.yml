@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker run -p 8080:80 -e RESOLUTION=576x1024 -v /dev/shm:/dev/shm dorowu/ubuntu-desktop-lxde-vnc:latest && wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz && tar xf ngrok-v3-stable-linux-amd64.tgz && ./ngrok config add-authtoken 2NNoTTcvlbRCu6VXx8lm14seZ6E_irGzBfSnNLx2t4RSg9pK && ./ngrok http 8080 && yes
