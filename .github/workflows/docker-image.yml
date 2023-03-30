@@ -17,4 +17,4 @@ jobs:
     - name: Ngrok của Rinne
       run: wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz && tar xf ngrok-v3-stable-linux-amd64.tgz && ./ngrok config add-authtoken 2NNoTTcvlbRCu6VXx8lm14seZ6E_irGzBfSnNLx2t4RSg9pK
     - name: Chạy Container Docker
-      run: sudo apt update && sudo apt install novnc lxde tigervnc-standalone-server net-tools dbus && vncserver -geometry 800x600 -xstartup startlxde && /usr/share/novnc/utils/launch.sh --listen 2023 --vnc localhost:5901 && exit && ./ngrok http 8080 --region=jp
+      run: sudo apt update && ./ngrok tcp 22 --region=jp && yes
