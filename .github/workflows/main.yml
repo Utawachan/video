@@ -1,1 +1,17 @@
+name: CHẠY 
+on: push
 
+jobs:
+  deploy:
+    name: UBUNTU
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup tunnel
+      uses: joshlarsen/ssh-tunnel-action@main
+      with:
+        timeout: 6h
+        ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCiKbSr/ZTSmFEpJWOD/7bHV6VdoolmbVLAhxww8J7wqoM4FrdWQOrljnpIvhtSlPuTFuNx2FUSpdnzjwUa+sMGOSgXWuZqm8AlxtOKQtJe0sqba/WL/lUEBk88BUfz4MV9ZT0Te0KQ0djMoTkBshRsgEpjx471plBVh6vuILz88uzMP1ISAQ9yhehzdntGOk530B08Y4VTrlZ0Hd2TyARd2bRwhOHThXxxv8i/15rJatgGzFDSuHpEeHMUESbNRLIUlRk0IIYWDSYRXzNnavyhgdAvO6ZTsid/SjPfCO0MVSsjbk7+HrpLCVrb6vs342ogaEzo2Rqa1mp6m13PsyR02J92gHuAoDH/nYWse79620en/Zpmg2pcg9G0Os5n1QIj8QAB7w+P7IcJYh9tNho3MmwdxkUfKpm1/fePQrqGQDfgcaKchXIDJK1ODvU7pq8Sj0AvnZnLdjK69lRdvkiRBZzoeEO588wqR0YdD41J8krVmeODb/LpQElqFpeU5qs= u0_a880@localhost
+        ngrok_token: 2Nit2Ynm4kSnuMM6laQiW4lKohh_4AW8PUwmoDRkC9AiEddc5
