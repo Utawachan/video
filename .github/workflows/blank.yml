@@ -27,5 +27,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Đang tải && sudo apt update &>/dev/null & wget -O chrome.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb &>/dev/null & sudo apt install ./chrome.deb -y &>/dev/null & echo Thành Công! && DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AVHEtk5KHXUjufBU6aPCylIzhsF-O89vJw5Xbsi69bZXH7kOOAeH-fFEfcyJlGYwn3rnZQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname) --pin=123456
+        run: echo Đang tải && sudo apt update &>/dev/null & wget -O chrome.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb && sudo apt install ./chrome.deb -y && echo Thành Công! && DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AVHEtk5KHXUjufBU6aPCylIzhsF-O89vJw5Xbsi69bZXH7kOOAeH-fFEfcyJlGYwn3rnZQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname) --pin=123456
       
